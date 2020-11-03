@@ -1,0 +1,6 @@
+context_path: sentimentanalysis.run.ProjectContext
+project_name: "SentimentAnalysis"
+project_version: "0.16.6"
+package_name: "sentimentanalysis"
+hooks:
+  - sentimentanalysis.hooks.project_hooks
