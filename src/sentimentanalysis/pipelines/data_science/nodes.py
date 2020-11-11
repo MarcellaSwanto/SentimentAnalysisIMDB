@@ -11,20 +11,23 @@ from sklearn.neighbors import KNeighborsClassifier
 def train_model(
         train_x: pd.DataFrame, train_y: pd.DataFrame, parameters: Dict[str, Any]
 ) -> np.ndarray:
-    model = KNeighborsClassifier(n_neighbors=1)
+    model = KNeighborsClassifier(n_neighbors=13)
     model.fit(train_x, train_y)
     return model
 
 
 ######
-# Whatis the model type for inputting it for predict node??
+# Whatis the model type for inputting it for predict node?? --> can use pd dataframe
 ######
 
+# def predict(model: pd.DataFrame, test_x: pd.DataFrame) -> np.ndarray:
 def predict(train_x: pd.DataFrame, train_y: pd.DataFrame, test_x: pd.DataFrame) -> np.ndarray:
     """Node for making predictions given a model and a test set.
     """
-    model = KNeighborsClassifier(n_neighbors=1)
+    # To be deleted when model is added as an input
+    model = KNeighborsClassifier(n_neighbors=13)
     model.fit(train_x, train_y)
+    ###
     y_pred = model.predict(test_x)
 
     # print(classification_report(y_test, y_pred, output_dict=True))

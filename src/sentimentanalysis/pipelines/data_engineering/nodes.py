@@ -1,35 +1,25 @@
 from typing import Any, Dict
-import numpy as np
 import pandas as pd
-
+from kedro.extras.datasets.pandas import ExcelDataSet
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
-from sklearn.svm import LinearSVC
-from sklearn.metrics import classification_report
-
-from sklearn.neighbors import KNeighborsClassifier
 
 
-def split_data(train: pd.CSVDataSet) -> Dict[str, Any]:
+def split_data(train: ExcelDataSet) -> Dict[str, Any]:
     df = pd.read_excel(train)
-    df = df.head(10)  # error if not: memory allocation
+    df = df.head(10)  # error to be solved: memory allocation- try in batches?
 
-    tfidf = TfidfVectorizer(max_features=5000)
+    tfidf = TfidfVectorizer(stop_words='english')  # , max_features=5000)
     X = df['Reviews']
     y = df['Sentiment']
 
     X = [str(item) for item in X]
 
+    # Generate document-term matrix
     X = tfidf.fit_transform(X)
 
     X_train, X_Test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
-    # model = KNeighborsClassifier(n_neighbors=1)
-    # model.fit(X_train, y_train)
-    # y_pred = model.predict(X_Test)
-    # print(classification_report(y_test, y_pred, output_dict=True))
-
-    # When returning many variables, it is a good practice to give them names:
     return dict(
         train_x=X_train,
         train_y=y_train,

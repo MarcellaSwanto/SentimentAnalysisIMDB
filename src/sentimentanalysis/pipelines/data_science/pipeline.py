@@ -8,12 +8,12 @@ def create_pipeline(**kwargs):
         [
             node(
                 train_model,
-                ["example_train_x", "example_train_y", "parameters"],
+                ["example_train_x", "example_train_y", "parameters"],  # parameters to be dealt with
                 "knn_model",
             ),
             node(
                 predict,
-                dict(model="knn_model", test_x="example_test_x"),
+                ["example_train_x", "example_train_y", "example_test_x"],  # model to be inputted
                 "example_predictions",
             ),
             node(

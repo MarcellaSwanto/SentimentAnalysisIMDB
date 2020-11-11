@@ -8,7 +8,7 @@ def create_pipeline(**kwargs):
         [
             node(
                 split_data,
-                ["train_set", "test_set"],
+                ["train_set"],  # only using train csv
                 dict(
                     train_x="example_train_x",
                     train_y="example_train_y",
