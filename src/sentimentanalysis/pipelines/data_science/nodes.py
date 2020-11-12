@@ -25,7 +25,7 @@ def predict(train_x: pd.DataFrame, train_y: pd.DataFrame, test_x: pd.DataFrame) 
     """Node for making predictions given a model and a test set.
     """
     # To be deleted when model is added as an input
-    model = KNeighborsClassifier(n_neighbors=13)
+    model = KNeighborsClassifier(n_neighbors=1)
     model.fit(train_x, train_y)
     ###
     y_pred = model.predict(test_x)

@@ -6,8 +6,13 @@ from sklearn.model_selection import train_test_split
 
 
 def split_data(train: ExcelDataSet) -> Dict[str, Any]:
-    df = pd.read_excel(train)
-    df = df.head(10)  # error to be solved: memory allocation- try in batches?
+    # print(train.head(5))
+    # df = pd.read_excel(train)
+    # reading train as ExcelDataSet from kedro's extras pandas datasets
+    # transforms it directly into a pandas dataframe
+    # so no need to do pd.read_excel
+    df = train
+    # df = df.head(10)  # error to be solved: memory allocation- try in batches?
 
     tfidf = TfidfVectorizer(stop_words='english')  # , max_features=5000)
     X = df['Reviews']
